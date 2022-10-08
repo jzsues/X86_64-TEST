@@ -10,7 +10,12 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.8.1/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
+# 修改lan 和 wan网卡顺序
+sed -i 's/lan/tmp_w/g' package/base-files/files/etc/board.d/99-default_network
+sed -i 's/wan/tmp_l/g' package/base-files/files/etc/board.d/99-default_network
+sed -i 's/tmp_w/wan/g' package/base-files/files/etc/board.d/99-default_network
+sed -i 's/tmp_l/lan/g' package/base-files/files/etc/board.d/99-default_network
 
 #6.添加自动挂载磁盘脚本
 #mkdir -p files/etc/hotplug.d/block && wget -O files/etc/hotplug.d/block/30-usbmount https://raw.githubusercontent.com/ficheny/P3TERX_Actions-OpenWrt/main/files/etc/hotplug.d/block/30-usbmount && chmod 755 files/etc/hotplug.d/block/30-usbmount
